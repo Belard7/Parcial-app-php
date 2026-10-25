@@ -12,7 +12,9 @@ $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=utf8mb4";
 try {
     $pdo = new PDO($dsn, $user, $pass, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        // Cambio clave: Desactivar la verificación estricta del certificado SSL para permitir la conexión con Aiven desde la nube
+        PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
     ]);
 } catch (\PDOException $e) {
     // En producción es mejor no mostrar el error exacto de conexión por seguridad
